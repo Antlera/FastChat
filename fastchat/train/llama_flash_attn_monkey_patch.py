@@ -3,6 +3,7 @@ from typing import List, Optional, Tuple
 import torch
 from torch import nn
 
+import logging
 import transformers
 from transformers.models.llama.modeling_llama import apply_rotary_pos_emb
 
@@ -67,7 +68,7 @@ def forward(
     # We have disabled _prepare_decoder_attention_mask in LlamaModel
     # the attention_mask should be the same as the key_padding_mask
     key_padding_mask = attention_mask
-
+    logging.info("heads! here!")
     if key_padding_mask is None:
         qkv = rearrange(qkv, "b s ... -> (b s) ...")
         max_s = q_len
@@ -80,6 +81,7 @@ def forward(
         output = rearrange(output, "(b s) ... -> b s ...", b=bsz)
     else:
         nheads = qkv.shape[-2]
+        logging.info("heads!:" + str(nheads))
         x = rearrange(qkv, "b s three h d -> b s (three h d)")
         x_unpad, indices, cu_q_lens, max_s = unpad_input(x, key_padding_mask)
         x_unpad = rearrange(
