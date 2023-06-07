@@ -3,7 +3,7 @@ import json
 import os
 import re
 
-models = ["alpaca", "llama", "gpt35", "bard"]
+models = ["ckpt298","ckpt596","ckpt894","vicuna"]
 
 # 获取当前工作目录
 current_directory = os.getcwd()
@@ -33,27 +33,20 @@ def trim_hanging_lines(s: str, n: int) -> str:
 if __name__ == "__main__":
     questions = read_jsonl("table/question.jsonl", key="question_id")
 
-    alpaca_answers = read_jsonl(
-        "table/answer/answer_alpaca-13b.jsonl", key="question_id"
-    )
-    bard_answers = read_jsonl("table/answer/answer_bard.jsonl", key="question_id")
-    gpt35_answers = read_jsonl("table/answer/answer_gpt35.jsonl", key="question_id")
-    llama_answers = read_jsonl("table/answer/answer_llama-13b.jsonl", key="question_id")
-    vicuna_answers = read_jsonl(
-        "table/answer/answer_vicuna-13b.jsonl", key="question_id"
-    )
+    ckpt298_answers = read_jsonl("/home/lan/CodeSpace/FastChat/fastchat/eval/table/answer/answer_vicuna_7b_alpaca1_ckpt298.jsonl", key="question_id")
+    ckpt596_answers = read_jsonl("/home/lan/CodeSpace/FastChat/fastchat/eval/table/answer/answer_vicuna_7b_alpaca1_ckpt596.jsonl", key="question_id")
+    ckpt894_answers = read_jsonl("/home/lan/CodeSpace/FastChat/fastchat/eval/table/answer/answer_vicuna_7b_alpaca1_ckpt894.jsonl", key="question_id")
+    ckpt1192_answers = read_jsonl("/home/lan/CodeSpace/FastChat/fastchat/eval/table/answer/answer_vicuna_7b_alpaca1_ckpt1192.jsonl", key="question_id")
 
-    review_alpaca = read_jsonl(
-        "table/review/vicuna-13b_20230322-clean-lang/review_alpaca-13b_vicuna-13b.jsonl", key="question_id"
+
+    review_ckpt298 = read_jsonl(
+        "/home/lan/CodeSpace/FastChat/fastchat/eval/table/review/vicuna_7b_alpaca1/review_ckpt298_ckpt1192.jsonl",key="question_id"
     )
-    review_bard = read_jsonl(
-        "table/review/vicuna-13b_20230322-clean-lang/review_bard_vicuna-13b.jsonl", key="question_id"
+    review_ckpt596 = read_jsonl(
+        "/home/lan/CodeSpace/FastChat/fastchat/eval/table/review/vicuna_7b_alpaca1/review_ckpt596_ckpt1192.jsonl",key="question_id"
     )
-    review_gpt35 = read_jsonl(
-        "table/review/vicuna-13b_20230322-clean-lang/review_gpt35_vicuna-13b.jsonl", key="question_id"
-    )
-    review_llama = read_jsonl(
-        "table/review/vicuna-13b_20230322-clean-lang/review_llama-13b_vicuna-13b.jsonl", key="question_id"
+    review_ckpt894 = read_jsonl(
+        "/home/lan/CodeSpace/FastChat/fastchat/eval/table/review/vicuna_7b_alpaca1/review_ckpt894_ckpt1192.jsonl",key="question_id"
     )
 
     records = []
@@ -63,23 +56,20 @@ if __name__ == "__main__":
             "category": questions[qid]["category"],
             "question": questions[qid]["text"],
             "answers": {
-                "alpaca": alpaca_answers[qid]["text"],
-                "llama": llama_answers[qid]["text"],
-                "bard": bard_answers[qid]["text"],
-                "gpt35": gpt35_answers[qid]["text"],
-                "vicuna": vicuna_answers[qid]["text"],
+                "ckpt298": ckpt298_answers[qid]["text"],
+                "ckpt596": ckpt596_answers[qid]["text"],
+                "ckpt894": ckpt894_answers[qid]["text"],
+                "vicuna": ckpt1192_answers[qid]["text"],
             },
             "evaluations": {
-                "alpaca": review_alpaca[qid]["text"],
-                "llama": review_llama[qid]["text"],
-                "bard": review_bard[qid]["text"],
-                "gpt35": review_gpt35[qid]["text"],
+                "ckpt298": review_ckpt298[qid]["text"],
+                "ckpt596": review_ckpt596[qid]["text"],
+                "ckpt894": review_ckpt894[qid]["text"],
             },
             "scores": {
-                "alpaca": review_alpaca[qid]["score"],
-                "llama": review_llama[qid]["score"],
-                "bard": review_bard[qid]["score"],
-                "gpt35": review_gpt35[qid]["score"],
+                "ckpt298": review_ckpt298[qid]["score"],
+                "ckpt596": review_ckpt596[qid]["score"],
+                "ckpt894": review_ckpt894[qid]["score"],
             },
         }
 

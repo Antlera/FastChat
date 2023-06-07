@@ -23,7 +23,7 @@ def get_eval(sys_prompt, user_prompt: str, max_tokens: int):
     for i in range(MAX_API_RETRY):
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-4",
+                model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": sys_prompt},
                     {
@@ -91,6 +91,10 @@ def get_json_list(file_path):
 
 
 if __name__ == "__main__":
+    os.environ["OPENAI_API_BASE"] = "https://ai.tudb.work/v1"
+    os.environ["OPENAI_API_KEY"] = "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" 
+    openai.api_base = os.getenv("OPENAI_API_BASE") 
+    openai.api_key = os.getenv("OPENAI_API_KEY")
     parser = argparse.ArgumentParser(description="ChatGPT-based QA evaluation.")
     parser.add_argument("-q", "--question-file")
     parser.add_argument("-a", "--answer-file-list", nargs="+", default=[])
