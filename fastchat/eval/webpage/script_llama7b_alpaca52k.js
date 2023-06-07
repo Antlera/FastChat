@@ -7,6 +7,8 @@ modelNameMapping = {
     "gpt35": "ChatGPT-3.5",
     "gpt4": "GPT-4",
     "ckpt298": "ckpt298",
+    "ckpt596": "ckpt596",
+    "ckpt894": "ckpt894",
     "vicuna": "Vicuna-13b",
     "llama": "LLaMA-13b",
     "bard": "Bard",
@@ -20,6 +22,8 @@ modelFigureMapping = {
     "bard": "figures/bard.jpg",
     // Image from: https://crfm.stanford.edu/2023/03/13/alpaca.html
     "ckpt298": "figures/alpaca.png",
+    "ckpt596": "figures/alpaca.png",
+    "ckpt894": "figures/alpaca.png",
     // Image adapted from https://commons.wikimedia.org/wiki/File:Llama_on_Machu_Picchu.jpg
     "llama": "figures/llama.jpg",
 }
