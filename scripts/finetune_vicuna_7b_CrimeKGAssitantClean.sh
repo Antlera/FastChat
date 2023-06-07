@@ -1,0 +1,23 @@
+nohup torchrun --nproc_per_node=3 --master_port=20001 fastchat/train/train_mem.py \
+    --model_name_or_path /home/lan/CodeSpace/FastChat/model_zoo/vicuna-7b  \
+    --data_path /home/lan/CodeSpace/FastChat/playground/data/CrimeKgAssitantClean_52k_vicuna.json \
+    --bf16 True \
+    --output_dir output/vicuna7b_CrimeKGAssitantClean_1/ \
+    --num_train_epochs 3 \
+    --per_device_train_batch_size 32 \
+    --per_device_eval_batch_size 32 \
+    --gradient_accumulation_steps 1 \
+    --evaluation_strategy "no"\
+    --save_strategy "steps"\
+    --save_steps 318 \
+    --save_total_limit 10 \
+    --learning_rate 2e-5 \
+    --weight_decay 0. \
+    --warmup_ratio 0.03 \
+    --lr_scheduler_type "cosine"\
+    --logging_steps 1 \
+    --model_max_length 600 \
+    --gradient_checkpointing True \
+    --lazy_preprocess True\
+    --deepspeed "./configs/default_offload_opt_param.json"\
+    --tf32 True &>"/home/lan/CodeSpace/FastChat/logs/vicuna7b_CrimeKGAssitantClean_1.log"&
